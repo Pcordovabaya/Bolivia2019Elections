@@ -1,0 +1,39 @@
+--This code is based on the data of the public vote count before it was suddenly stopped
+
+
+-- Show only President and Vicepresident votes
+SELECT *
+FROM elecciones2019..trepstop
+WHERE elecciones2019..trepstop.MAS >100 AND elecciones2019..trepstop.ElectionType = 'Presidente y Vicepresidente'
+ORDER By Registered DESC
+
+--Count Total Registered and total votes..
+SELECT ElectionType, SUM(Registered) AS TotalRegistered, SUM(ValidVotes) AS TotalValidVotes, SUM(Invalid) AS TotalInvalid, SUM(None) AS TotalNone, SUM(MAS) AS TotalMAS, SUM(CC) AS TotalCC, SUM(F21) AS TotalF21, SUM(FPV) AS TotalFPV, SUM(MTS) AS TotalMTS, SUM(UCS) AS TotalUCS, SUM(PDC) AS TotalPDC, SUM(MNR) AS TotalMNR, SUM(PAN) AS TotalPan, SUM(MAS + CC + F21 + FPV + MTS + MNR + PAN + UCS + PDC) AS TotalValidTrue
+FROM elecciones2019..trepstop
+WHERE ElectionType = 'Presidente y Vicepresidente'
+Group by ElectionType
+
+--Count Total Registered and total votes.. CTE
+WITH CTE_trepstop as
+(SELECT ElectionType, SUM(Registered) AS TotalRegistered, SUM(ValidVotes) AS TotalValidVotes, SUM(Invalid) AS TotalInvalid, SUM(None) AS TotalNone, SUM(MAS) AS TotalMAS, SUM(CC) AS TotalCC, SUM(F21) AS TotalF21, SUM(FPV) AS TotalFPV, SUM(MTS) AS TotalMTS, SUM(UCS) AS TotalUCS, SUM(PDC) AS TotalPDC, SUM(MNR) AS TotalMNR, SUM(PAN) AS TotalPan, SUM(MAS + CC + F21 + FPV + MTS + MNR + PAN + UCS + PDC) AS TotalValidTrue
+FROM elecciones2019..trepstop
+WHERE ElectionType = 'Presidente y Vicepresidente'
+Group by ElectionType
+)
+SELECT ElectionType, ((TotalMas/TotalValidTrue)*100) AS MASPercentage, ((TotalCC/TotalValidTrue)*100) AS CCPercentage,((TotalF21/TotalValidTrue)*100) AS F21Percentage 
+FROM CTE_trepstop
+
+--Count Total Registered and total votes.. CTE inside another CTE
+WITH CTE_trepstop as
+(SELECT ElectionType, SUM(Registered) AS TotalRegistered, SUM(ValidVotes) AS TotalValidVotes, SUM(Invalid) AS TotalInvalid, SUM(None) AS TotalNone, SUM(MAS) AS TotalMAS, SUM(CC) AS TotalCC, SUM(F21) AS TotalF21, SUM(FPV) AS TotalFPV, SUM(MTS) AS TotalMTS, SUM(UCS) AS TotalUCS, SUM(PDC) AS TotalPDC, SUM(MNR) AS TotalMNR, SUM(PAN) AS TotalPan, SUM(MAS + CC + F21 + FPV + MTS + MNR + PAN + UCS + PDC) AS TotalValidTrue
+FROM elecciones2019..trepstop
+WHERE ElectionType = 'Presidente y Vicepresidente'
+Group by ElectionType
+), 
+CTE2_trepstop as
+(SELECT ElectionType, ((TotalMas/TotalValidTrue)*100) AS MASPercentage, ((TotalCC/TotalValidTrue)*100) AS CCPercentage,((TotalF21/TotalValidTrue)*100) AS F21Percentage 
+FROM CTE_trepstop
+
+)
+SELECT ElectionType, MASPercentage, CCPercentage, (MASPercentage - CCPercentage) AS Mas_CC_Difference
+FROM CTE2_trepstop

@@ -13,15 +13,69 @@ FROM elecciones2019..trepstop
 WHERE ElectionType = 'Presidente y Vicepresidente'
 Group by ElectionType
 
---Count Total Registered and total votes.. CTE
+--Totals (%)
 WITH CTE_trepstop as
 (SELECT ElectionType, SUM(Registered) AS TotalRegistered, SUM(ValidVotes) AS TotalValidVotes, SUM(Invalid) AS TotalInvalid, SUM(None) AS TotalNone, SUM(MAS) AS TotalMAS, SUM(CC) AS TotalCC, SUM(F21) AS TotalF21, SUM(FPV) AS TotalFPV, SUM(MTS) AS TotalMTS, SUM(UCS) AS TotalUCS, SUM(PDC) AS TotalPDC, SUM(MNR) AS TotalMNR, SUM(PAN) AS TotalPan, SUM(MAS + CC + F21 + FPV + MTS + MNR + PAN + UCS + PDC) AS TotalValidTrue
 FROM elecciones2019..trepstop
 WHERE ElectionType = 'Presidente y Vicepresidente'
 Group by ElectionType
 )
-SELECT ElectionType, ((TotalMas/TotalValidTrue)*100) AS MASPercentage, ((TotalCC/TotalValidTrue)*100) AS CCPercentage,((TotalF21/TotalValidTrue)*100) AS F21Percentage 
+SELECT ElectionType, ((TotalMas/TotalValidTrue)*100) AS MASPercentage, ((TotalCC/TotalValidTrue)*100) AS CCPercentage,((TotalF21/TotalValidTrue)*100) AS F21Percentage, ((TotalFPV/TotalValidTrue)*100) AS FPVPercentage, ((TotalMTS/TotalValidTrue)*100) AS MTSPercentage, ((TotalUCS/TotalValidTrue)*100) AS UCSPercentage, ((TotalMNR/TotalValidTrue)*100) AS MNRPercentage, ((TotalPDC/TotalValidTrue)*100) AS PDCPercentage, ((TotalPan/TotalValidTrue)*100) AS PANPercentage
 FROM CTE_trepstop
+
+WITH CTE_trepafter1 as
+(SELECT ElectionType, SUM(Registered) AS TotalRegistered, SUM(ValidVotes) AS TotalValidVotes, SUM(Invalid) AS TotalInvalid, SUM(None) AS TotalNone, SUM(MAS) AS TotalMAS, SUM(CC) AS TotalCC, SUM(F21) AS TotalF21, SUM(FPV) AS TotalFPV, SUM(MTS) AS TotalMTS, SUM(UCS) AS TotalUCS, SUM(PDC) AS TotalPDC, SUM(MNR) AS TotalMNR, SUM(PAN) AS TotalPan, SUM(MAS + CC + F21 + FPV + MTS + MNR + PAN + UCS + PDC) AS TotalValidTrue
+FROM elecciones2019..trepafter1
+WHERE ElectionType = 'Presidente y Vicepresidente'
+Group by ElectionType
+)
+SELECT ElectionType, ((TotalMas/TotalValidTrue)*100) AS MASPercentage, ((TotalCC/TotalValidTrue)*100) AS CCPercentage,((TotalF21/TotalValidTrue)*100) AS F21Percentage, ((TotalFPV/TotalValidTrue)*100) AS FPVPercentage, ((TotalMTS/TotalValidTrue)*100) AS MTSPercentage, ((TotalUCS/TotalValidTrue)*100) AS UCSPercentage, ((TotalMNR/TotalValidTrue)*100) AS MNRPercentage, ((TotalPDC/TotalValidTrue)*100) AS PDCPercentage, ((TotalPan/TotalValidTrue)*100) AS PANPercentage 
+FROM CTE_trepafter1
+
+WITH CTE_trepafter6 as
+(SELECT ElectionType, SUM(Registered) AS TotalRegistered, SUM(ValidVotes) AS TotalValidVotes, SUM(Invalid) AS TotalInvalid, SUM(None) AS TotalNone, SUM(MAS) AS TotalMAS, SUM(CC) AS TotalCC, SUM(F21) AS TotalF21, SUM(FPV) AS TotalFPV, SUM(MTS) AS TotalMTS, SUM(UCS) AS TotalUCS, SUM(PDC) AS TotalPDC, SUM(MNR) AS TotalMNR, SUM(PAN) AS TotalPan, SUM(MAS + CC + F21 + FPV + MTS + MNR + PAN + UCS + PDC) AS TotalValidTrue
+FROM elecciones2019..trepafter6
+WHERE ElectionType = 'Presidente y Vicepresidente'
+Group by ElectionType
+)
+SELECT ElectionType, ((TotalMas/TotalValidTrue)*100) AS MASPercentage, ((TotalCC/TotalValidTrue)*100) AS CCPercentage,((TotalF21/TotalValidTrue)*100) AS F21Percentage, ((TotalFPV/TotalValidTrue)*100) AS FPVPercentage, ((TotalMTS/TotalValidTrue)*100) AS MTSPercentage, ((TotalUCS/TotalValidTrue)*100) AS UCSPercentage, ((TotalMNR/TotalValidTrue)*100) AS MNRPercentage, ((TotalPDC/TotalValidTrue)*100) AS PDCPercentage, ((TotalPan/TotalValidTrue)*100) AS PANPercentage 
+FROM CTE_trepafter6
+
+WITH CTE_trepafter10 as
+(SELECT ElectionType, SUM(Registered) AS TotalRegistered, SUM(ValidVotes) AS TotalValidVotes, SUM(Invalid) AS TotalInvalid, SUM(None) AS TotalNone, SUM(MAS) AS TotalMAS, SUM(CC) AS TotalCC, SUM(F21) AS TotalF21, SUM(FPV) AS TotalFPV, SUM(MTS) AS TotalMTS, SUM(UCS) AS TotalUCS, SUM(PDC) AS TotalPDC, SUM(MNR) AS TotalMNR, SUM(PAN) AS TotalPan, SUM(MAS + CC + F21 + FPV + MTS + MNR + PAN + UCS + PDC) AS TotalValidTrue
+FROM elecciones2019..trepafter10
+WHERE ElectionType = 'Presidente y Vicepresidente'
+Group by ElectionType
+)
+SELECT ElectionType, ((TotalMas/TotalValidTrue)*100) AS MASPercentage, ((TotalCC/TotalValidTrue)*100) AS CCPercentage,((TotalF21/TotalValidTrue)*100) AS F21Percentage, ((TotalFPV/TotalValidTrue)*100) AS FPVPercentage, ((TotalMTS/TotalValidTrue)*100) AS MTSPercentage, ((TotalUCS/TotalValidTrue)*100) AS UCSPercentage, ((TotalMNR/TotalValidTrue)*100) AS MNRPercentage, ((TotalPDC/TotalValidTrue)*100) AS PDCPercentage, ((TotalPan/TotalValidTrue)*100) AS PANPercentage 
+FROM CTE_trepafter10
+
+WITH CTE_trepafter16 as
+(SELECT ElectionType, SUM(Registered) AS TotalRegistered, SUM(ValidVotes) AS TotalValidVotes, SUM(Invalid) AS TotalInvalid, SUM(None) AS TotalNone, SUM(MAS) AS TotalMAS, SUM(CC) AS TotalCC, SUM(F21) AS TotalF21, SUM(FPV) AS TotalFPV, SUM(MTS) AS TotalMTS, SUM(UCS) AS TotalUCS, SUM(PDC) AS TotalPDC, SUM(MNR) AS TotalMNR, SUM(PAN) AS TotalPan, SUM(MAS + CC + F21 + FPV + MTS + MNR + PAN + UCS + PDC) AS TotalValidTrue
+FROM elecciones2019..trepafter16
+WHERE ElectionType = 'Presidente y Vicepresidente'
+Group by ElectionType
+)
+SELECT ElectionType, ((TotalMas/TotalValidTrue)*100) AS MASPercentage, ((TotalCC/TotalValidTrue)*100) AS CCPercentage,((TotalF21/TotalValidTrue)*100) AS F21Percentage, ((TotalFPV/TotalValidTrue)*100) AS FPVPercentage, ((TotalMTS/TotalValidTrue)*100) AS MTSPercentage, ((TotalUCS/TotalValidTrue)*100) AS UCSPercentage, ((TotalMNR/TotalValidTrue)*100) AS MNRPercentage, ((TotalPDC/TotalValidTrue)*100) AS PDCPercentage, ((TotalPan/TotalValidTrue)*100) AS PANPercentage 
+FROM CTE_trepafter16
+
+WITH CTE_trepafter21 as
+(SELECT ElectionType, SUM(Registered) AS TotalRegistered, SUM(ValidVotes) AS TotalValidVotes, SUM(Invalid) AS TotalInvalid, SUM(None) AS TotalNone, SUM(MAS) AS TotalMAS, SUM(CC) AS TotalCC, SUM(F21) AS TotalF21, SUM(FPV) AS TotalFPV, SUM(MTS) AS TotalMTS, SUM(UCS) AS TotalUCS, SUM(PDC) AS TotalPDC, SUM(MNR) AS TotalMNR, SUM(PAN) AS TotalPan, SUM(MAS + CC + F21 + FPV + MTS + MNR + PAN + UCS + PDC) AS TotalValidTrue
+FROM elecciones2019..trepafter21
+WHERE ElectionType = 'Presidente y Vicepresidente'
+Group by ElectionType
+)
+SELECT ElectionType, ((TotalMas/TotalValidTrue)*100) AS MASPercentage, ((TotalCC/TotalValidTrue)*100) AS CCPercentage,((TotalF21/TotalValidTrue)*100) AS F21Percentage, ((TotalFPV/TotalValidTrue)*100) AS FPVPercentage, ((TotalMTS/TotalValidTrue)*100) AS MTSPercentage, ((TotalUCS/TotalValidTrue)*100) AS UCSPercentage, ((TotalMNR/TotalValidTrue)*100) AS MNRPercentage, ((TotalPDC/TotalValidTrue)*100) AS PDCPercentage, ((TotalPan/TotalValidTrue)*100) AS PANPercentage 
+FROM CTE_trepafter21
+
+WITH CTE_trepafter28 as
+(SELECT ElectionType, SUM(Registered) AS TotalRegistered, SUM(ValidVotes) AS TotalValidVotes, SUM(Invalid) AS TotalInvalid, SUM(None) AS TotalNone, SUM(MAS) AS TotalMAS, SUM(CC) AS TotalCC, SUM(F21) AS TotalF21, SUM(FPV) AS TotalFPV, SUM(MTS) AS TotalMTS, SUM(UCS) AS TotalUCS, SUM(PDC) AS TotalPDC, SUM(MNR) AS TotalMNR, SUM(PAN) AS TotalPan, SUM(MAS + CC + F21 + FPV + MTS + MNR + PAN + UCS + PDC) AS TotalValidTrue
+FROM elecciones2019..trepafter28
+WHERE ElectionType = 'Presidente y Vicepresidente'
+Group by ElectionType
+)
+SELECT ElectionType, ((TotalMas/TotalValidTrue)*100) AS MASPercentage, ((TotalCC/TotalValidTrue)*100) AS CCPercentage,((TotalF21/TotalValidTrue)*100) AS F21Percentage, ((TotalFPV/TotalValidTrue)*100) AS FPVPercentage, ((TotalMTS/TotalValidTrue)*100) AS MTSPercentage, ((TotalUCS/TotalValidTrue)*100) AS UCSPercentage, ((TotalMNR/TotalValidTrue)*100) AS MNRPercentage, ((TotalPDC/TotalValidTrue)*100) AS PDCPercentage, ((TotalPan/TotalValidTrue)*100) AS PANPercentage 
+FROM CTE_trepafter28
 
 --Count Total Registered and total votes.. CTE inside another CTE
 WITH CTE_trepstop as
@@ -37,3 +91,86 @@ FROM CTE_trepstop
 )
 SELECT ElectionType, MASPercentage, CCPercentage, (MASPercentage - CCPercentage) AS Mas_CC_Difference
 FROM CTE2_trepstop
+
+--Count where MAS = 100% of votes
+SELECT Count(MAS) AS OneHundredPercent
+FROM elecciones2019.dbo.trepstop
+WHERE MAS = Registered
+
+SELECT MAS, ValidVotes
+FROM elecciones2019.dbo.trepstop
+WHERE MAS = Registered AND ElectionType = 'Presidente y Vicepresidente'
+
+--Count where MAS = 100% of votes
+SELECT Count(MAS) AS OneHundredPercent
+FROM elecciones2019.dbo.trepafterstop
+WHERE MAS = Registered
+
+SELECT MAS, ValidVotes
+FROM elecciones2019.dbo.trepafterstop
+WHERE MAS = Registered AND ElectionType = 'Presidente y Vicepresidente'
+
+--Count where MAS == ValidVotes
+SELECT Count(MAS) as MASequaltoValid
+FROM elecciones2019.dbo.trepstop
+where MAS=ValidVotes
+
+--Count where cc == 0 votes
+SELECT CC, MAS, ValidVotes, ((CC / ValidVotes)*100) AS CCPercentage, ((MAS / ValidVotes)*100) AS MASPercentage
+FROM elecciones2019.dbo.trepstop
+WHERE CC = 0 AND ElectionType = 'Presidente y Vicepresidente' AND ValidVotes > 0 AND Country = 'Bolivia'
+
+SELECT CC, MAS, ValidVotes, ((CC / ValidVotes)*100) AS CCPercentage, ((MAS / ValidVotes)*100) AS MASPercentage
+FROM elecciones2019.dbo.trepafterstop
+WHERE CC = 0 AND ElectionType = 'Presidente y Vicepresidente' AND ValidVotes > 0 AND Country = 'Bolivia'
+
+SELECT Count(CC) as CCequalZero
+FROM elecciones2019.dbo.trepstop
+WHERE CC = 0 AND ElectionType = 'Presidente y Vicepresidente' AND ValidVotes > 0 AND Country = 'Bolivia'
+
+SELECT Count(CC) as CCequalZero
+FROM elecciones2019.dbo.trepafterstop
+WHERE CC = 0 AND ElectionType = 'Presidente y Vicepresidente' AND ValidVotes > 0 AND Country = 'Bolivia'
+
+--Where  CC = 0,  Show elections results per party (trepstop)
+SELECT ElectionType,CC, MAS, ValidVotes, ((CC / ValidVotes)*100) AS CCPercentage, ((MAS / ValidVotes)*100) AS MASPercentage
+FROM elecciones2019.dbo.trepstop
+WHERE CC = 0 AND ElectionType = 'Presidente y Vicepresidente' AND ValidVotes > 0 AND Country = 'Bolivia'
+
+
+
+WITH CTE_trepstop as
+(SELECT ElectionType, CC, MAS, ValidVotes, ((CC / ValidVotes)*100) AS CCPercentage, ((MAS / ValidVotes)*100) AS MASPercentage, ((FPV / ValidVotes)*100) AS FPVPercentage, ((MTS / ValidVotes)*100) AS MTSPercentage, ((UCS / ValidVotes)*100) AS UCSPercentage, ((F21 / ValidVotes)*100) AS F21Percentage, ((PDC / ValidVotes)*100) AS PDCPercentage, ((MNR / ValidVotes)*100) AS MNRPercentage, ((PAN / ValidVotes)*100) AS PANPercentage 
+FROM elecciones2019.dbo.trepstop
+WHERE CC = 0 AND ElectionType = 'Presidente y Vicepresidente' AND ValidVotes > 0 AND Country = 'Bolivia'
+),
+
+CTE2_trepstop as
+(SELECT ElectionType,(SUM(CCPercentage)) AS TotalCCPercentage, (SUM(MASPercentage)) AS TotalMASPercentage, COUNT(MASPercentage) AS Flag, (SUM(FPVPercentage)) AS TotalFPVPercentage, (SUM(MTSPercentage)) AS TotalMTSPercentage, (SUM(UCSPercentage)) AS TotalUCSPercentage, (SUM(F21Percentage)) AS TotalF21Percentage,(SUM(PDCPercentage)) AS TotalPDCPercentage, (SUM(MNRPercentage)) AS TotalMNRPercentage, (SUM(PANPercentage)) AS TotalPANPercentage
+ FROM CTE_trepstop
+ Group By ElectionType
+)
+SELECT Flag AS TablesWhereCCisZero,(TotalCCPercentage/Flag) AS CCAverage ,(TotalMASPercentage/Flag) AS MASAverage, (TotalFPVPercentage/Flag) AS FPVAverage, (TotalMTSPercentage/Flag) AS MTSAverage, (TotalUCSPercentage/Flag) AS UCSAverage, (TotalF21Percentage/Flag) AS F21Average, (TotalPDCPercentage/Flag) AS PDCAverage, (TotalMNRPercentage/Flag) AS MNRAverage, (TotalPANPercentage/Flag) AS PANAverage
+FROM CTE2_trepstop
+
+--Where  CC = 0,  Show elections results per party (trepafter1)
+
+SELECT ElectionType,CC, MAS, ValidVotes, ((CC / ValidVotes)*100) AS CCPercentage, ((MAS / ValidVotes)*100) AS MASPercentage
+FROM elecciones2019.dbo.trepafter1
+WHERE CC = 0 AND ElectionType = 'Presidente y Vicepresidente' AND ValidVotes > 0 AND Country = 'Bolivia'
+
+
+
+WITH CTE_trepafter1 as
+(SELECT ElectionType, CC, MAS, ValidVotes, ((CC / ValidVotes)*100) AS CCPercentage, ((MAS / ValidVotes)*100) AS MASPercentage, ((FPV / ValidVotes)*100) AS FPVPercentage, ((MTS / ValidVotes)*100) AS MTSPercentage, ((UCS / ValidVotes)*100) AS UCSPercentage, ((F21 / ValidVotes)*100) AS F21Percentage, ((PDC / ValidVotes)*100) AS PDCPercentage, ((MNR / ValidVotes)*100) AS MNRPercentage, ((PAN / ValidVotes)*100) AS PANPercentage 
+FROM elecciones2019.dbo.trepafter1
+WHERE CC = 0 AND ElectionType = 'Presidente y Vicepresidente' AND ValidVotes > 0 AND Country = 'Bolivia'
+),
+
+CTE2_trepafter1 as
+(SELECT ElectionType,(SUM(CCPercentage)) AS TotalCCPercentage, (SUM(MASPercentage)) AS TotalMASPercentage, COUNT(MASPercentage) AS Flag, (SUM(FPVPercentage)) AS TotalFPVPercentage, (SUM(MTSPercentage)) AS TotalMTSPercentage, (SUM(UCSPercentage)) AS TotalUCSPercentage, (SUM(F21Percentage)) AS TotalF21Percentage,(SUM(PDCPercentage)) AS TotalPDCPercentage, (SUM(MNRPercentage)) AS TotalMNRPercentage, (SUM(PANPercentage)) AS TotalPANPercentage
+ FROM CTE_trepafter1
+ Group By ElectionType
+)
+SELECT Flag AS TablesWhereCCisZero,(TotalCCPercentage/Flag) AS CCAverage ,(TotalMASPercentage/Flag) AS MASAverage, (TotalFPVPercentage/Flag) AS FPVAverage, (TotalMTSPercentage/Flag) AS MTSAverage, (TotalUCSPercentage/Flag) AS UCSAverage, (TotalF21Percentage/Flag) AS F21Average, (TotalPDCPercentage/Flag) AS PDCAverage, (TotalMNRPercentage/Flag) AS MNRAverage, (TotalPANPercentage/Flag) AS PANAverage
+FROM CTE2_trepafter1

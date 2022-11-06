@@ -238,3 +238,57 @@ Group by ElectionType, DepartmentID, Department
 SELECT ElectionType, DepartmentId,Department,(TotalCCvotes/TotalValidVotes)*100 AS TotalCCPercentage, (TotalMASvotes/TotalValidVotes)*100 AS TotalMASPercentage, (TotalF21votes/TotalValidVotes)*100 AS TotalF21Percentage, (TotalFPVvotes/TotalValidVotes)*100 AS TotalFPVPercentage, (TotalMTSvotes/TotalValidVotes)*100 AS TotalMTSPercentage, (TotalUCSvotes/TotalValidVotes)*100 AS TotalUCSPercentage, (TotalPDCvotes/TotalValidVotes)*100 AS TotalPDCPercentage, (TotalMNRvotes/TotalValidVotes)*100 AS TotalMNRPercentage, (TotalPANvotes/TotalValidVotes)*100 AS TotalPANPercentage
  FROM CTE_trepafter1
   Order By DepartmentId
+  -- New 06-11-2022 Only show data from trepafter1 (anti Right join)
+  Select elecciones2019.dbo.trepafter1.*
+  From elecciones2019.dbo.trepstop
+  right join elecciones2019.dbo.trepafter1 on trepstop.TableCode = trepafter1.TableCode
+  Where trepstop.TableCode IS NULL AND trepafter1.Country = 'Bolivia' AND trepafter1.Electiontype = 'Presidente y Vicepresidente'
+
+-- New 06-11-2022 Only show data of Cochabamba from trepafter1 (anti Right join)
+With CTE_trepafter1 as
+(  Select elecciones2019.dbo.trepafter1.*
+  From elecciones2019.dbo.trepstop
+  right join elecciones2019.dbo.trepafter1 on trepstop.TableCode = trepafter1.TableCode
+  Where trepstop.TableCode IS NULL AND trepafter1.Country = 'Bolivia' AND trepafter1.Electiontype = 'Presidente y Vicepresidente'
+),
+CTE_trepafterx as
+(Select ElectionType, DepartmentId, Department,Sum(CC) AS TotalCCvotes, SUM(MAS) AS TotalMASvotes, SUM(ValidVotes) AS TotalValidVotes, SUM(FPV) AS TotalFPVvotes, SUM(MTS) AS TotalMTSvotes, Sum(UCS) AS TotalUCSVotes, SUM(F21) AS TotalF21Votes, SUM(PDC) AS TotalPDCvotes, Sum(MNR) AS TotalMNRvotes, Sum(PAN) AS TotalPANvotes
+FROM CTE_trepafter1
+Where Department = 'Cochabamba'
+Group by ElectionType, DepartmentID, Department
+)
+SELECT ElectionType, TotalValidVotes, DepartmentId,Department,(TotalCCvotes/TotalValidVotes)*100 AS TotalCCPercentage, (TotalMASvotes/TotalValidVotes)*100 AS TotalMASPercentage, (TotalF21votes/TotalValidVotes)*100 AS TotalF21Percentage, (TotalFPVvotes/TotalValidVotes)*100 AS TotalFPVPercentage, (TotalMTSvotes/TotalValidVotes)*100 AS TotalMTSPercentage, (TotalUCSvotes/TotalValidVotes)*100 AS TotalUCSPercentage, (TotalPDCvotes/TotalValidVotes)*100 AS TotalPDCPercentage, (TotalMNRvotes/TotalValidVotes)*100 AS TotalMNRPercentage, (TotalPANvotes/TotalValidVotes)*100 AS TotalPANPercentage
+ FROM CTE_trepafterx
+
+-- New 06-11-2022 Only show data of Chuquisaca from trepafter1 (anti Right join)
+With CTE_trepafter1 as
+(  Select elecciones2019.dbo.trepafter1.*
+  From elecciones2019.dbo.trepstop
+  right join elecciones2019.dbo.trepafter1 on trepstop.TableCode = trepafter1.TableCode
+  Where trepstop.TableCode IS NULL AND trepafter1.Country = 'Bolivia' AND trepafter1.Electiontype = 'Presidente y Vicepresidente'
+),
+CTE_trepafterx as
+(Select ElectionType, DepartmentId, Department,Sum(CC) AS TotalCCvotes, SUM(MAS) AS TotalMASvotes, SUM(ValidVotes) AS TotalValidVotes, SUM(FPV) AS TotalFPVvotes, SUM(MTS) AS TotalMTSvotes, Sum(UCS) AS TotalUCSVotes, SUM(F21) AS TotalF21Votes, SUM(PDC) AS TotalPDCvotes, Sum(MNR) AS TotalMNRvotes, Sum(PAN) AS TotalPANvotes
+FROM CTE_trepafter1
+Where Department = 'Chuquisaca'
+Group by ElectionType, DepartmentID, Department
+)
+SELECT ElectionType, TotalValidVotes, DepartmentId,Department,(TotalCCvotes/TotalValidVotes)*100 AS TotalCCPercentage, (TotalMASvotes/TotalValidVotes)*100 AS TotalMASPercentage, (TotalF21votes/TotalValidVotes)*100 AS TotalF21Percentage, (TotalFPVvotes/TotalValidVotes)*100 AS TotalFPVPercentage, (TotalMTSvotes/TotalValidVotes)*100 AS TotalMTSPercentage, (TotalUCSvotes/TotalValidVotes)*100 AS TotalUCSPercentage, (TotalPDCvotes/TotalValidVotes)*100 AS TotalPDCPercentage, (TotalMNRvotes/TotalValidVotes)*100 AS TotalMNRPercentage, (TotalPANvotes/TotalValidVotes)*100 AS TotalPANPercentage
+ FROM CTE_trepafterx
+  Order By DepartmentId
+
+-- New 06-11-2022 Only show data of Chuquisaca from trepafter1 (anti Right join)
+With CTE_trepafter1 as
+(  Select elecciones2019.dbo.trepafter1.*
+  From elecciones2019.dbo.trepstop
+  right join elecciones2019.dbo.trepafter1 on trepstop.TableCode = trepafter1.TableCode
+  Where trepstop.TableCode IS NULL AND trepafter1.Country = 'Bolivia' AND trepafter1.Electiontype = 'Presidente y Vicepresidente'
+),
+CTE_trepafterx as
+(Select ElectionType, DepartmentId, Department,Sum(CC) AS TotalCCvotes, SUM(MAS) AS TotalMASvotes, SUM(ValidVotes) AS TotalValidVotes, SUM(FPV) AS TotalFPVvotes, SUM(MTS) AS TotalMTSvotes, Sum(UCS) AS TotalUCSVotes, SUM(F21) AS TotalF21Votes, SUM(PDC) AS TotalPDCvotes, Sum(MNR) AS TotalMNRvotes, Sum(PAN) AS TotalPANvotes
+FROM CTE_trepafter1
+Group by ElectionType, DepartmentID, Department
+)
+SELECT ElectionType, TotalValidVotes, DepartmentId,Department,(TotalCCvotes/TotalValidVotes)*100 AS TotalCCPercentage, (TotalMASvotes/TotalValidVotes)*100 AS TotalMASPercentage, (TotalF21votes/TotalValidVotes)*100 AS TotalF21Percentage, (TotalFPVvotes/TotalValidVotes)*100 AS TotalFPVPercentage, (TotalMTSvotes/TotalValidVotes)*100 AS TotalMTSPercentage, (TotalUCSvotes/TotalValidVotes)*100 AS TotalUCSPercentage, (TotalPDCvotes/TotalValidVotes)*100 AS TotalPDCPercentage, (TotalMNRvotes/TotalValidVotes)*100 AS TotalMNRPercentage, (TotalPANvotes/TotalValidVotes)*100 AS TotalPANPercentage
+ FROM CTE_trepafterx
+  Order By DepartmentId

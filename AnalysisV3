@@ -277,7 +277,7 @@ SELECT ElectionType, TotalValidVotes, DepartmentId,Department,(TotalCCvotes/Tota
  FROM CTE_trepafterx
   Order By DepartmentId
 
--- New 06-11-2022 Only show data of Chuquisaca from trepafter1 (anti Right join)
+-- New 06-11-2022 show only new data from trepafter1 corresponding to each department (anti Right join)
 With CTE_trepafter1 as
 (  Select elecciones2019.dbo.trepafter1.*
   From elecciones2019.dbo.trepstop
